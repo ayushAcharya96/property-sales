@@ -2,8 +2,8 @@ package com.property;
 
 import java.awt.EventQueue;
 
-import com.property.gui.LoginForm;
-import com.property.utils.FileManager;
+import com.property.utils.FileDb;
+import com.property.view.LoginView;
 
 public class App {
 
@@ -15,13 +15,13 @@ public class App {
 			public void run() {
 				try {
 					
-					FileManager fm = new FileManager();
+					FileDb fm = new FileDb();
 					fm.loadBranch();
 					fm.loadHouse();
 					fm.loadFlat();
 					fm.loadId();
 					
-					LoginForm frame = new LoginForm();
+					LoginView frame = new LoginView();
 					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
