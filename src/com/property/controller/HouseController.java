@@ -7,14 +7,14 @@ import com.property.model.House;
 
 public class HouseController {
 	
-	private static List<House> houses = new ArrayList<House>();
+	private static List<House> houseList = new ArrayList<House>();
 	
 	public List<House> getHouses() {
-		return houses;
+		return houseList;
 	}
 	
 	public House getHouse(int id) {
-		for(House h: houses) {
+		for(House h: houseList) {
 			if(h.getId() == id) {
 				return h;
 			}
@@ -23,18 +23,18 @@ public class HouseController {
 	}
 	
 	public boolean createHouse(House house) {
-		if(houses.add(house)) {
+		if(houseList.add(house)) {
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean updateHouse(int id, House house) {
-		for(House h: houses) {
+		for(House h: houseList) {
 			if(h.getId() == id) {
-				int i = houses.indexOf(h);
+				int i = houseList.indexOf(h);
 				house.setId(id);
-				houses.set(i, house);
+				houseList.set(i, house);
 				return true;
 			}
 		}
@@ -43,9 +43,9 @@ public class HouseController {
 	
 	public boolean deleteHouse(int id)
 	{
-		for(House h : houses) {
+		for(House h : houseList) {
 			if(h.getId() == id) {
-				houses.remove(h);
+				houseList.remove(h);
 				return true;
 			}
 		}

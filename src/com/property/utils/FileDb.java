@@ -17,12 +17,12 @@ import com.property.model.Property;
 
 public class FileDb {
 	
-	private BranchController bs;
-	private HouseController hs;
-	private FlatController fs;
+	private BranchController bc;
+	private HouseController hc;
+	private FlatController fc;
 
-	public void loadBranch() {
-		bs = new BranchController();
+	public void loadBranchFromFile() {
+		bc = new BranchController();
 		Branch branch;
 		
 	    String fileToParse = "C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\branches.csv";
@@ -47,8 +47,7 @@ public class FileDb {
 	              String password = tokens[7];
 	              
 	              branch = new Branch(id, name, phoneNo, address, email, webAddress, username, password);
-	              bs.createBranch(branch);
-	              System.out.println("End of a branch");
+	              bc.createBranch(branch);
 	          }
 	      } 
 	      catch (Exception e) {
@@ -64,15 +63,15 @@ public class FileDb {
 	      }
 	}
 	
-	public void writeBranch() {
-		bs = new BranchController();
+	public void saveBranchToFile() {
+		bc = new BranchController();
 		  
 	    BufferedWriter buffer = null;
 	    try {
 	    	FileWriter writer = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\branches.csv");
 	    	
 	    	buffer = new BufferedWriter(writer);
-	    	for(Branch b : bs.getBranches()) {
+	    	for(Branch b : bc.getBranches()) {
 	    		buffer.write(b.toString());
 	    		buffer.write("\n");
 	    	}
@@ -90,9 +89,9 @@ public class FileDb {
 	    
 	}
 	
-	public void loadHouse() {
+	public void loadHouseFromFile() {
 		
-		hs = new HouseController();
+		hc = new HouseController();
 		House house;
 		
 		String fileToParse = "C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\houses.csv";
@@ -118,8 +117,7 @@ public class FileDb {
 	              boolean hasGarage = tokens[8] == "True" ? true : false;
 	              
 	              house = new House(id, address, noOfRooms, sellingPrice, soldPrice, branchId, noOfFloors, hasGarden, hasGarage);
-	              hs.createHouse(house);
-	              System.out.println("End of a branch");
+	              hc.createHouse(house);
 	          }
 	      } 
 	      catch (Exception e) {
@@ -135,18 +133,16 @@ public class FileDb {
 	      }
 	}
 	
-	public void writeHouse() {
-		hs = new HouseController();
+	public void saveHouseToFile() {
+		hc = new HouseController();
 		
 	    BufferedWriter buffer = null;
 	    try {
 	    	FileWriter writer = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\houses.csv");
 	    	
 	    	buffer = new BufferedWriter(writer);
-	    	System.out.println(hs.getHouses());
-	    	for(House h : hs.getHouses()) {
-	    		System.out.println(hs.getHouses());
-	    		if(hs.getHouses() == null) {
+	    	for(House h : hc.getHouses()) {
+	    		if(hc.getHouses() == null) {
 	    			break;
 	    		}
 	    		buffer.write(h.toString());
@@ -166,9 +162,9 @@ public class FileDb {
 	    
 	}
 	
-public void loadFlat() {
+public void loadFlatFromFile() {
 		
-		fs = new FlatController();
+		fc = new FlatController();
 		Flat flat;
 		
 		String fileToParse = "C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\flats.csv";
@@ -193,8 +189,7 @@ public void loadFlat() {
 	              int monthlyCharge = Integer.parseInt(tokens[7]);
 	              
 	              flat = new Flat(id, address, noOfRooms, sellingPrice, soldPrice, branchId, floorNo, monthlyCharge);
-	              fs.createFlat(flat);
-	              System.out.println("End of a branch");
+	              fc.createFlat(flat);
 	          }
 	      } 
 	      catch (Exception e) {
@@ -211,25 +206,25 @@ public void loadFlat() {
 	}
 	
 
-	public void writeFlat() {
-		fs = new FlatController();
-		BufferedWriter buffer = null;
+	public void saveFlatToFile() {
+		fc = new FlatController();
+		BufferedWriter b = null;
 		try {
-			FileWriter writer = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\flats.csv");
+			FileWriter w = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\flats.csv");
     	
-			buffer = new BufferedWriter(writer);
-			for(Flat f : fs.getFlats()) {
-				if(fs.getFlats() == null) {
+			b = new BufferedWriter(w);
+			for(Flat f : fc.getFlats()) {
+				if(fc.getFlats() == null) {
 	    			break;
 	    		}
-				buffer.write(f.toString());
-				buffer.write("\n");
+				b.write(f.toString());
+				b.write("\n");
 			}
 		} catch (Exception e)  {
 			e.printStackTrace();
 		} finally {
 			try {
-				buffer.close();
+				b.close();
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
@@ -237,7 +232,7 @@ public void loadFlat() {
     
 	}
 	
-	public void loadId() {
+	public void loadIdFromFile() {
 		
 	    String fileToParse = "C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\ids.csv";
 	    BufferedReader fileReader = null;
@@ -272,19 +267,19 @@ public void loadFlat() {
 	      }
 	}
 	
-	public void writeId() {
-		BufferedWriter buffer = null;
+	public void saveIdToFile() {
+		BufferedWriter b = null;
 		try {
-			FileWriter writer = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\ids.csv");
+			FileWriter w = new FileWriter("C:\\Users\\ayush\\eclipse-workspace\\PropertySalesSystem\\src\\com\\property\\resource\\ids.csv");
     	
-			buffer = new BufferedWriter(writer);
-				buffer.write(((Integer) new Branch().getCount()).toString() + "," + ((Integer) new Property().getCount()).toString());
-				buffer.write("\n");
+			b = new BufferedWriter(w);
+				b.write(((Integer) new Branch().getCount()).toString() + "," + ((Integer) new Property().getCount()).toString());
+				b.write("\n");
 		} catch (Exception e)  {
 			e.printStackTrace();
 		} finally {
 			try {
-				buffer.close();
+				b.close();
 			} catch(IOException e) {
 				e.printStackTrace();
 			}

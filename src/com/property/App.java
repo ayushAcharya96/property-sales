@@ -16,14 +16,14 @@ public class App {
 				try {
 					
 					FileDb fm = new FileDb();
-					fm.loadBranch();
-					fm.loadHouse();
-					fm.loadFlat();
-					fm.loadId();
+					fm.loadBranchFromFile();
+					fm.loadHouseFromFile();
+					fm.loadFlatFromFile();
+					fm.loadIdFromFile();
 					
-					LoginView frame = new LoginView();
-					frame.setResizable(false);
-					frame.setVisible(true);
+					LoginView view = new LoginView();
+					view.setResizable(false);
+					view.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

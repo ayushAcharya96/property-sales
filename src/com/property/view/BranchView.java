@@ -2,6 +2,7 @@ package com.property.view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ import com.property.controller.HouseController;
 import com.property.model.Branch;
 import com.property.model.Flat;
 import com.property.model.House;
-import com.property.utils.Validation;
+import com.property.utils.Middleware;
 
 public class BranchView extends JFrame {
 
@@ -69,7 +70,7 @@ public class BranchView extends JFrame {
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				new Validation().closeWindow(e);
+				new Middleware().closeWindow(e);
 			}
 		});
 		
@@ -90,7 +91,9 @@ public class BranchView extends JFrame {
 				logoutButtonClicked(e);
 			}
 		});
-		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLogout.setForeground(new Color(255, 255, 255));
+		btnLogout.setBackground(new Color(255, 0, 0));
 		btnLogout.setBounds(820, 13, 95, 36);
 		panel.add(btnLogout);
 		
@@ -181,7 +184,8 @@ public class BranchView extends JFrame {
 				addPropertyButtonClicked(e);
 			}
 		});
-		
+		btnAddProperty.setForeground(new Color(255, 255, 255));
+		btnAddProperty.setBackground(new Color(0, 0, 255));
 		btnAddProperty.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnAddProperty.setBounds(42, 655, 160, 36);
 		formPanel.add(btnAddProperty);
@@ -192,6 +196,8 @@ public class BranchView extends JFrame {
 				updateButtonClicked(e);
 			}
 		});
+		btnUpdateProperty.setForeground(new Color(255, 255, 255));
+		btnUpdateProperty.setBackground(new Color(60, 179, 113));
 		btnUpdateProperty.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnUpdateProperty.setBounds(42, 702, 160, 36);
 		formPanel.add(btnUpdateProperty);
@@ -202,6 +208,8 @@ public class BranchView extends JFrame {
 				deleteButtonClicked(e);
 			}
 		});
+		btnDeleteProperty.setForeground(new Color(255, 255, 255));
+		btnDeleteProperty.setBackground(new Color(255, 0, 0));
 		btnDeleteProperty.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnDeleteProperty.setBounds(42, 749, 160, 36);
 		formPanel.add(btnDeleteProperty);
@@ -367,7 +375,7 @@ public class BranchView extends JFrame {
 	
 	private void addPropertyButtonClicked(ActionEvent e) {
 		if(rdbtnHouse.isSelected()) {
-			Validation v = new Validation();
+			Middleware v = new Middleware();
 			
 			HouseController hs = new HouseController();
 			boolean hasGdn = rdbtnHasGardenYes.isSelected()? true : false;
@@ -380,7 +388,7 @@ public class BranchView extends JFrame {
 			}
 			
 		} else if (rdbtnFlat.isSelected()) {
-			Validation v = new Validation();
+			Middleware v = new Middleware();
 			
 			FlatController fs = new FlatController();
 			Flat f = v.validateFlat(address.getText(), noOfRooms.getText(), sellingPrice.getText(), soldPrice.getText(), floorNo.getText(), monthlyCharge.getText());
@@ -401,7 +409,7 @@ public class BranchView extends JFrame {
 			if(i > -1) {
 				int id = Integer.parseInt(houseModel.getValueAt(i, 0).toString());
 				
-				Validation v = new Validation();
+				Middleware v = new Middleware();
 				
 				HouseController hs = new HouseController();
 				boolean hasGdn = rdbtnHasGardenYes.isSelected()? true : false;
@@ -448,7 +456,7 @@ public class BranchView extends JFrame {
 	}
 	
 	private void logoutButtonClicked(ActionEvent e) {
-		new Validation().setUser("");
+		new Middleware().setUser("");
 		this.dispose();
 		new LoginView().setVisible(true);
 	}

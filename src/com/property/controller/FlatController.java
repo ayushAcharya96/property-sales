@@ -7,10 +7,10 @@ import com.property.model.Flat;
 
 public class FlatController {
 	
-	private static List<Flat> flats = new ArrayList<Flat>();
+	private static List<Flat> flatList = new ArrayList<Flat>();
 	
 	public Flat getFlat(int id) {
-		for(Flat f: flats) {
+		for(Flat f: flatList) {
 			if(f.getId() == id) {
 				return f;
 			}
@@ -19,22 +19,22 @@ public class FlatController {
 	}
 	
 	public List<Flat> getFlats() {
-		return flats;
+		return flatList;
 	}
 	
 	public boolean createFlat(Flat flat) {
-		if(flats.add(flat)) {
+		if(flatList.add(flat)) {
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean updateFlat(int id, Flat flat) {
-		for(Flat f: flats) {
+		for(Flat f: flatList) {
 			if(f.getId() == id) {
-				int i = flats.indexOf(f);
+				int i = flatList.indexOf(f);
 				flat.setId(id);
-				flats.set(i, flat);
+				flatList.set(i, flat);
 				return true;
 			}
 		}
@@ -42,9 +42,9 @@ public class FlatController {
 	}
 	
 	public boolean deleteFlat(int id) {
-		for(Flat f: flats) {
+		for(Flat f: flatList) {
 			if (f.getId() == id) {
-				flats.remove(f);
+				flatList.remove(f);
 				return true;
 			}
 		}

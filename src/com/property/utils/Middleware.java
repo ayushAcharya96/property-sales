@@ -8,9 +8,9 @@ import com.property.controller.BranchController;
 import com.property.model.Flat;
 import com.property.model.House;
 
-public class Validation {
+public class Middleware {
 	
-	private BranchController bs = new BranchController();
+	private BranchController bc = new BranchController();
 	
 	private static String user;
 	
@@ -21,7 +21,7 @@ public class Validation {
 
 
 	public void setUser(String user) {
-		Validation.user = user;
+		Middleware.user = user;
 	}
 
 
@@ -31,12 +31,12 @@ public class Validation {
 			return "";
 		}
 		if(userName.equals("admin") && password.equals("admin")) {
-			Validation.user = userName;
+			Middleware.user = userName;
 			return userName;
 		}
 		
-		if(bs.exists(userName, password)) {
-			Validation.user = userName;
+		if(bc.exists(userName, password)) {
+			Middleware.user = userName;
 			return userName;
 		}
 		JOptionPane.showMessageDialog(new JFrame(),"Incorrect UserName or Password","Alert",JOptionPane.WARNING_MESSAGE);
@@ -72,7 +72,7 @@ public class Validation {
 	}
 	
 	public boolean userNameExists(String userName) {
-		if(bs.exists(userName)) {
+		if(bc.exists(userName)) {
 			JOptionPane.showMessageDialog(new JFrame(),"User Name already exists.","Alert", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
@@ -96,7 +96,7 @@ public class Validation {
 				double solp = Double.parseDouble(soldPrice);
 				int fn = Integer.parseInt(floorNo);
 				int mc = Integer.parseInt(monthlyCharge);
-				return new Flat(address, rooms, sp, solp, bs.getBranchId(user), fn, mc);
+				return new Flat(address, rooms, sp, solp, bc.getBranchId(user), fn, mc);
 			} catch(NumberFormatException e) {
 				JOptionPane.showMessageDialog(new JFrame(),"Invalid Input. Enter Numbers where required.","Alert", JOptionPane.WARNING_MESSAGE);
 				return null;
@@ -120,7 +120,7 @@ public class Validation {
 			double sp = Double.parseDouble(sellingPrice);
 			double solp = Double.parseDouble(soldPrice);
 			int fn = Integer.parseInt(noOfFloors);
-			return new House(address, rooms, sp, solp, bs.getBranchId(user), fn, hasGarden, hasGarden);
+			return new House(address, rooms, sp, solp, bc.getBranchId(user), fn, hasGarden, hasGarden);
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(new JFrame(),"Invalid Input. Enter Numbers where required.","Alert", JOptionPane.WARNING_MESSAGE);
 		}
@@ -128,10 +128,10 @@ public class Validation {
 	}
 	
 	public void closeWindow(WindowEvent e) {
-		new FileDb().writeBranch();
-		new FileDb().writeHouse();
-		new FileDb().writeFlat();
-		new FileDb().writeId();
+		new FileDb().saveBranchToFile();
+		new FileDb().saveHouseToFile();
+		new FileDb().saveFlatToFile();
+		new FileDb().saveIdToFile();
 		JOptionPane.showMessageDialog(null,"Exiting the system.");
 		System.exit(0);
 	}

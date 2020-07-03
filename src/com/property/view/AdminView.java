@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.property.controller.BranchController;
 import com.property.model.Branch;
-import com.property.utils.Validation;
+import com.property.utils.Middleware;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -50,7 +50,7 @@ public class AdminView extends JFrame {
 	public AdminView() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				new Validation().closeWindow(e);
+				new Middleware().closeWindow(e);
 			}
 		});
 		setBounds(100, 100, 937, 826);
@@ -152,8 +152,10 @@ public class AdminView extends JFrame {
 		formPanel.add(rePassword);
 		
 		JButton btnAddBranch = new JButton("Add Branch");
+		btnAddBranch.setForeground(new Color(255, 255, 255));
+		btnAddBranch.setBackground(new Color(0, 0, 255));
 		
-		btnAddBranch.setBounds(674, 56, 132, 30);
+		btnAddBranch.setBounds(674, 56, 132, 42);
 		btnAddBranch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addButtonClicked(e);
@@ -162,22 +164,26 @@ public class AdminView extends JFrame {
 		formPanel.add(btnAddBranch);
 		
 		JButton btnUpdateBranch = new JButton("Update Branch");
+		btnUpdateBranch.setForeground(new Color(255, 255, 255));
+		btnUpdateBranch.setBackground(new Color(60, 179, 113));
 		btnUpdateBranch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateButtonClicked(e);
 			}
 		});
-		btnUpdateBranch.setBounds(674, 139, 132, 30);
+		btnUpdateBranch.setBounds(674, 139, 132, 42);
 		formPanel.add(btnUpdateBranch);
 		
 		JButton btnDeleteBranch = new JButton("Delete Branch");
+		btnDeleteBranch.setForeground(new Color(255, 255, 255));
+		btnDeleteBranch.setBackground(new Color(255, 0, 0));
 		btnDeleteBranch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deleteButtonClicked(e);
 				
 			}
 		});
-		btnDeleteBranch.setBounds(674, 230, 132, 30);
+		btnDeleteBranch.setBounds(674, 230, 132, 42);
 		formPanel.add(btnDeleteBranch);
 		
 		JPanel panel = new JPanel();
@@ -186,6 +192,9 @@ public class AdminView extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLogout.setForeground(new Color(255, 255, 255));
+		btnLogout.setBackground(new Color(255, 0, 0));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logoutButtonClicked(e);
@@ -246,7 +255,7 @@ public class AdminView extends JFrame {
 	}
 	
 	private void addButtonClicked(ActionEvent e) {
-		Validation v = new Validation();
+		Middleware v = new Middleware();
 		if(v.validateAddBranch(name.getText(), phoneNo.getText(), webAddress.getText(), email.getText(), address.getText(), username.getText(), new String(password.getPassword()), new String(rePassword.getPassword()))) {
 			Branch b = new Branch(name.getText(), phoneNo.getText(), webAddress.getText(), email.getText(), address.getText(), username.getText(), new String(password.getPassword()));
 			BranchController bs = new BranchController();
@@ -263,7 +272,7 @@ public class AdminView extends JFrame {
 			int id = Integer.parseInt(model.getValueAt(i, 0).toString());
 			BranchController bs = new BranchController();
 			Branch branch = new Branch(name.getText(), phoneNo.getText(), webAddress.getText(), email.getText(), address.getText(), username.getText(), new String(password.getPassword()));
-			Validation v = new Validation();
+			Middleware v = new Middleware();
 			if(v.validateBranch(name.getText(), phoneNo.getText(), webAddress.getText(), email.getText(), address.getText(), username.getText(), new String(password.getPassword()), new String(rePassword.getPassword())) && (username.getText() != model.getValueAt(i, 6) || !(v.userNameExists(username.getText())))) {
 				bs.updateBranch(id, branch);
 				model.setValueAt(name.getText(), i, 1);
@@ -292,7 +301,7 @@ public class AdminView extends JFrame {
 	}
 	
 	private void logoutButtonClicked(ActionEvent e) {
-		Validation v = new Validation();
+		Middleware v = new Middleware();
 		v.setUser(null);
 		this.dispose();
 		new LoginView().setVisible(true);

@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.property.utils.Validation;
+import com.property.utils.Middleware;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class LoginView extends JFrame {
 
@@ -25,7 +26,7 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				new Validation().closeWindow(e);
+				new Middleware().closeWindow(e);
 			}
 		});
 		setBounds(100, 100, 588, 425);
@@ -59,6 +60,7 @@ public class LoginView extends JFrame {
 		panel.add(passwordField);
 		
 		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loginBtnClicked(e);
@@ -71,7 +73,7 @@ public class LoginView extends JFrame {
 	}
 	
 	private void loginBtnClicked(ActionEvent e) {
-		Validation v = new Validation();
+		Middleware v = new Middleware();
 		String userName = textField.getText();
 		String password = new String(passwordField.getPassword());
 		String result = v.validateLogin(userName, password);
